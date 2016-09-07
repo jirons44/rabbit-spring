@@ -18,7 +18,7 @@ public class Position {
     private String longitude;
     private String latitude;
     private String altitude;
-    private Date currentTimeItude;
+    private Date currentTime;
     private Date created;
     private Date modified;
     private Run run;
@@ -64,13 +64,9 @@ public class Position {
         this.altitude = altitude;
     }
 
-    @CreationTimestamp
-    public Date getCurrentTimeItude() {
-        return currentTimeItude;
-    }
-    public void setCurrentTimeItude(Date currentTimeItude) {
-        this.currentTimeItude = currentTimeItude;
-    }
+    @Column(name="curr_time", nullable = false)
+    public Date getCurrentTime() { return currentTime;}
+    public void setCurrentTime(Date currentTime) {this.currentTime = currentTime; }
 
     @CreationTimestamp
     public Date getCreated() {
@@ -89,7 +85,7 @@ public class Position {
     }
 
     @ManyToOne
-    @JoinColumn(name = "run_id" )
+    @JoinColumn(name = "run_id", nullable = false)
     @JsonIgnore
     public Run getRun() {
         return run;

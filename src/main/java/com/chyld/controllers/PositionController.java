@@ -22,7 +22,7 @@ public class PositionController {
     @RequestMapping(value = "/{deviceId}", method = RequestMethod.POST)
     public Position createPosition(@PathVariable int deviceId, @RequestBody Position position) {
         Device device = deviceService.findById( deviceId );
-        Run run = device.getStartedRun();
+        Run run = device.startedRun();
         position.setRun(run);
         run.getPositions().add(position);
         runService.saveRun(run);

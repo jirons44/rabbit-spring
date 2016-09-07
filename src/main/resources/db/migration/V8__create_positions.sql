@@ -4,7 +4,7 @@ CREATE TABLE `fitness`.`positions` (
   `latitude` VARCHAR(45) NOT NULL,
   `longitude` VARCHAR(45) NOT NULL,
   `altitude` VARCHAR(45) NOT NULL,
-  `currenttimeitude` TIMESTAMP NOT NULL,
+  `curr_time` TIMESTAMP NOT NULL DEFAULT NOW(),
   `created` TIMESTAMP NOT NULL DEFAULT NOW(),
   `modified` TIMESTAMP NOT NULL DEFAULT NOW(),
   `run_id` INT NOT NULL,

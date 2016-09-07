@@ -127,7 +127,7 @@ public class  Device {
     }
 
 
-    public Run getStartedRun() {
+    public Run startedRun() {
         Run startedRun = null;
 
         for ( Run run : this.runs ) {

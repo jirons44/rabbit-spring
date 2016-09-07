@@ -11,3 +11,9 @@ VALUES ('0', 'M', '25', '70', '165', 'http://findicons.com/files/icons/1072/face
 
 INSERT INTO `fitness`.`exercises` (`version`, `type`, `quantity`, `calories`, `duration`, `user_id`)
 VALUES ('0', 'RUN', '3', '900', '45', '1');
+
+INSERT INTO `fitness`.`devices` (`serial_number`, `product`, `category`, `user_id`)
+VALUES ('123456789', 'FITBIT Extreme', 'RUN', '1');
+
+INSERT INTO `fitness`.`runs` (`device_id`)
+VALUES ('1');
