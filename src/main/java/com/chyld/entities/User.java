@@ -4,11 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.geo.Distance;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.persistence.CascadeType;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -25,6 +27,7 @@ public class User implements UserDetails {
     private List<Role> roles;
     private Profile profile;
     private List<Exercise> exercises;
+    private List<Device> devices;
     private Date created;
     private Date modified;
 
@@ -88,4 +91,8 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {return this.enabled;}
     public void setEnabled(boolean enabled) {this.enabled = enabled;}
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    public List<Device> getDevices() {return devices;}
+    public void setDevices(List<Device> devices) {this.devices = devices;}
 }
