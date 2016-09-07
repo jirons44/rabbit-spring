@@ -1,6 +1,7 @@
 package com.chyld.services;
 
 import com.chyld.entities.Device;
+import com.chyld.entities.Run;
 import com.chyld.repositories.IDeviceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,5 +19,9 @@ public class DeviceService {
 
     public void deleteDevice(Device device) {
         deviceRepository.delete(device);
+    }
+
+    public Run findCurrentRun() {
+        return null;
     }
 }

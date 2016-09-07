@@ -7,11 +7,17 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
 
 @Entity
 @Table(name="devices")
-@Data
+//@Data
 public class  Device {
     private int id;
     private int version;
@@ -21,6 +27,7 @@ public class  Device {
     private User user;
     private Date created;
     private Date modified;
+    private List<Run> runs;
 
     @Id
     @GeneratedValue
@@ -87,5 +94,48 @@ public class  Device {
     }
     public void setModified(Date modified) {
         this.modified = modified;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "device")
+    public List<Run> getRuns() { return runs; }
+    public void setRuns(List<Run> runs) { this.runs = runs;}
+
+
+    public boolean doesNotHaveCurrentRun() {
+        //Optional<Run> run = runs.stream().filter(r -> r.getEndTime().equals(null)).findFirst();
+        //run.ifPresent();
+        boolean x = true;
+        for ( Run run : this.runs ) {
+            if (run.getEndTime() == null) {
+                x = false;
+                break;
+            }
+        }
+
+        return x;
+    }
+
+    public void stopRun() {
+        for ( Run run : this.runs ) {
+            if (run.getEndTime() == null) {
+                Date date = new Date();
+                run.setEndTime(date);
+                break;
+            }
+        }
+
+    }
+
+
+    public Run getStartedRun() {
+        Run startedRun = null;
+
+        for ( Run run : this.runs ) {
+            if (run.getEndTime() == null) {
+                startedRun =  run;
+                break;
+            }
+        }
+        return startedRun;
     }
 }
